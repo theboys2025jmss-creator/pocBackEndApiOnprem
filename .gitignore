@@ -1,0 +1,14 @@
+.env
+__pycache__/
+*.pyc
+.pdm-python
+.pdm-build/
+.pdm.toml
+dist/
+.coverage
+htmlcov/
+
+# Datasets (se montan externamente)
+data/
+*.csv
+*.parquet
