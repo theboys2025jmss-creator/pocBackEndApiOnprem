@@ -1,0 +1,19 @@
+Metadata-Version: 2.4
+Name: api-onprem
+Version: 1.0.0
+Summary: API on-prem demo (FastAPI) con estructura escalable y telemetría básica.
+Requires-Python: >=3.11
+Requires-Dist: fastapi==0.115.0
+Requires-Dist: uvicorn==0.30.6
+Requires-Dist: pydantic==2.9.2
+Requires-Dist: pydantic-settings==2.5.2
+Requires-Dist: structlog==24.4.0
+Provides-Extra: dev
+Requires-Dist: pytest==8.3.3; extra == "dev"
+Requires-Dist: pytest-cov==5.0.0; extra == "dev"
+Requires-Dist: ruff==0.6.8; extra == "dev"
+Requires-Dist: mypy==1.11.2; extra == "dev"
+Requires-Dist: httpx==0.27.2; extra == "dev"
+Requires-Dist: types-requests==2.32.0.20240914; extra == "dev"
+Requires-Dist: freezegun==1.5.1; extra == "dev"
+Requires-Dist: pylint==3.2.7; extra == "dev"
