@@ -7,3 +7,8 @@ __pycache__/
 dist/
 .coverage
 htmlcov/
+
+# Datasets (se montan externamente)
+data/
+*.csv
+*.parquet

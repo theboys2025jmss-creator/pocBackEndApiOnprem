@@ -11,6 +11,8 @@ class Settings(BaseSettings):
     HTTP_HOST: str = "0.0.0.0"
     HTTP_PORT: int = 8000
     ENABLE_CORS: bool = True
+    DATA_PATH: str = "/app/data"
+    SLOW_DELAY: int = 5
 
     model_config = SettingsConfigDict(env_file=".env", case_sensitive=False)
 
