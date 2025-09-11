@@ -1,3 +1,5 @@
+import time
+
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -22,11 +24,26 @@ if settings.ENABLE_CORS:
 
 @app.middleware("http")
 async def logRequests(request: Request, callNext):
-    """Log HTTP requests start and end."""
+    """Log HTTP requests with timing and request ID."""
 
-    logger.info("request.start", method=request.method, path=request.url.path)
+    requestId = request.headers.get("X-Request-ID", "unknown")
+    startTime = time.time()
+
+    logger.info("request.start", requestId=requestId, method=request.method, path=request.url.path)
+
     resp = await callNext(request)
-    logger.info("request.end", status=resp.status_code)
+
+    duration = round((time.time() - startTime) * 1000, 2)
+
+    logger.info(
+        "request.end",
+        requestId=requestId,
+        method=request.method,
+        path=request.url.path,
+        status=resp.status_code,
+        durationMs=duration,
+    )
+
     return resp
 
 

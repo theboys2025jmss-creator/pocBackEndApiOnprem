@@ -16,6 +16,7 @@ class Settings(BaseSettings):
     ADMIN_USER: str = "Admin"
     ADMIN_PASS: str = "root"
 
+
     model_config = SettingsConfigDict(env_file=".env", case_sensitive=False)
 
 
