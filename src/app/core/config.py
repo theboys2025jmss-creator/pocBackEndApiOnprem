@@ -13,8 +13,12 @@ class Settings(BaseSettings):
     ENABLE_CORS: bool = True
     DATA_PATH: str = "/app/data"
     SLOW_DELAY: int = 5
+    ADMIN_USER: str = "Admin"
+    ADMIN_PASS: str = "root"
+
 
     model_config = SettingsConfigDict(env_file=".env", case_sensitive=False)
+
 
 
 settings = Settings()
