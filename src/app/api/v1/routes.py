@@ -2,8 +2,18 @@ from fastapi import APIRouter, HTTPException
 
 from ...core.config import settings
 from ...core.version import getVersion
-from ...models.schemas import Echo, LoginRequest, LoginResponse
+from ...models.schemas import (
+    Echo,
+    LoginRequest,
+    LoginResponse,
+    Order,
+    OrderResponse,
+    SlowResponse,
+    UnstableResponse,
+)
+from ...services.csv_service import csvService
 from ...services.health_service import health
+from ...services.simulation_service import simulationService
 
 router = APIRouter()
 
@@ -39,3 +49,31 @@ def login(credentials: LoginRequest):
         return LoginResponse(success=True, message="Login successful", token="demo-token-12345")
 
     return LoginResponse(success=False, message="Invalid credentials")
+
+
+@router.get("/orders", response_model=list[OrderResponse])
+def getOrders():
+    """Get all orders from CSV file."""
+
+    return csvService.getOrders()
+
+
+@router.post("/orders", response_model=OrderResponse)
+def createOrder(order: Order):
+    """Create new order and save to CSV file."""
+
+    return csvService.addOrder(order)
+
+
+@router.get("/unstable", response_model=UnstableResponse)
+async def unstableEndpoint():
+    """Simulate unstable endpoint with random failures."""
+
+    return await simulationService.unstableEndpoint()
+
+
+@router.get("/slow", response_model=SlowResponse)
+async def slowEndpoint():
+    """Simulate slow endpoint with configurable delay."""
+
+    return await simulationService.slowEndpoint()
